@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserData, selectIsAuth } from '../../redux/slices/auth';
+import { fetchAuth, selectIsAuth } from '../../redux/slices/auth';
 
 import { Navigate } from 'react-router-dom';
 import styles from './Login.module.scss';
@@ -21,15 +21,22 @@ export const Login = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: 'test@mail.ua',
+      email: 'pasha@mail.ua',
       password: '1234',
     },
     mode: 'onChange',
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
-    dispatch(fetchUserData(values));
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchAuth(values));
+    console.log(data);
+    if (!data.payload) {
+      return alert('You auth error!');
+    }
+    if ('token' in data.payload) {
+      window.localStorage.setItem('token', data.payload.token);
+    }
+    // console.log(dispatch(fetchUserData(values)));
   };
 
   if (isAuth) {
