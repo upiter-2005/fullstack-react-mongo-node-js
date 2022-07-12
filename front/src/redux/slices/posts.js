@@ -6,11 +6,13 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   console.log('ajax', data);
   return data;
 });
+
 export const fetchTags = createAsyncThunk('posts/fetchTags', async () => {
   const { data } = await axios.get('/tags');
   console.log('ajax', data);
   return data;
 });
+
 export const fetchDeletePost = createAsyncThunk('posts/fetchDeletePost', async (id) => {
   axios.delete(`/posts/${id}`);
 });

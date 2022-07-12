@@ -42,7 +42,7 @@ export const FullPost = () => {
         isFullPost>
         <ReactMarkdown children={data.text} />
       </Post>
-      <CommentsBlock
+      {/* <CommentsBlock
         items={[
           {
             user: {
@@ -61,7 +61,7 @@ export const FullPost = () => {
         ]}
         isLoading={false}>
         <Index />
-      </CommentsBlock>
+      </CommentsBlock> */}
     </>
   );
 };
